@@ -4,19 +4,21 @@ class QuestionsController < ApplicationController
   def create
     question = Question.create(question_params)
 
-    redirect_to question_path(question)
+    #flash[:notice] = 'Новый вопрос создан!'
+
+    redirect_to question_path(question), notice: 'Question created!'
   end
 
   def update
     @question.update(question_params)
 
-    redirect_to question_path(@question)
+    redirect_to question_path(@question), notice: 'Question updated!'
   end
 
   def destroy
     @question.destroy
 
-    redirect_to questions_path
+    redirect_to questions_path, notice: 'Question deleted!'
   end
 
   def show
@@ -25,6 +27,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    @question = Question.new
   end
 
   def new
